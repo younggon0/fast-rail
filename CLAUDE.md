@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a FastHTML + Railway template designed for rapid hackathon development. The application uses FastHTML for web development with automatic HTML generation and built-in routing, configured for seamless Railway deployment.
+This is a FastHTML + Railway template designed for rapid hackathon development. The application uses FastHTML for web development with automatic HTML generation and built-in routing, integrated with Supabase for authentication and database operations, configured for seamless Railway deployment.
 
 ## Development Commands
 
@@ -19,6 +19,13 @@ python main.py             # Start development server (http://localhost:5001)
 ```bash
 uv add <package>           # Add new dependency
 uv remove <package>        # Remove dependency
+```
+
+**Supabase Setup:**
+```bash
+cp .env.example .env       # Copy environment template
+# Edit .env with Supabase credentials
+uv run python setup_database.py  # Get SQL for database setup
 ```
 
 **Railway Deployment:**
@@ -39,7 +46,13 @@ railway status             # Check deployment status
 - `railway.toml` - Railway-specific config with health check endpoint (`/health`)
 - `runtime.txt` - Python version specification for deployment
 
-**Package Management:** Uses `uv` for fast dependency resolution. Dependencies defined in `pyproject.toml` with FastHTML and uvicorn as core requirements.
+**Package Management:** Uses `uv` for fast dependency resolution. Dependencies defined in `pyproject.toml` with FastHTML, uvicorn, supabase-py, and python-dotenv as core requirements.
+
+**Authentication & Database:** Integrated Supabase backend providing:
+- User authentication (signup, login, logout, sessions)
+- PostgreSQL database with Row Level Security
+- Real-time capabilities and file storage
+- Demo login for hackathon convenience (`demo@hackathon.dev`)
 
 ## Key Patterns
 
@@ -48,3 +61,7 @@ railway status             # Check deployment status
 - Development uses FastHTML's built-in hot reload via `serve()`
 - Production uses uvicorn ASGI server with environment-based port binding
 - Railway deployment uses `nixpacks.toml` for uv-based builds
+- Supabase integration with environment variable configuration
+- Authentication middleware and session management
+- Database helper class for CRUD operations
+- Protected routes requiring authentication
