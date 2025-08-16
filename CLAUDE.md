@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a FastHTML + Railway template designed for rapid hackathon development. The application uses FastHTML for web development with automatic HTML generation and built-in routing, integrated with Supabase for authentication and database operations, configured for seamless Railway deployment.
+This is a FastHTML + Railway template designed for rapid hackathon development. The application uses FastHTML for web development with automatic HTML generation and built-in routing, integrated with Supabase for authentication and relational data, Neo4j for graph database capabilities, configured for seamless Railway deployment.
 
 ## Development Commands
 
@@ -46,13 +46,13 @@ railway status             # Check deployment status
 - `railway.toml` - Railway-specific config with health check endpoint (`/health`)
 - `runtime.txt` - Python version specification for deployment
 
-**Package Management:** Uses `uv` for fast dependency resolution. Dependencies defined in `pyproject.toml` with FastHTML, uvicorn, supabase-py, and python-dotenv as core requirements.
+**Package Management:** Uses `uv` for fast dependency resolution. Dependencies defined in `pyproject.toml` with FastHTML, uvicorn, supabase-py, neo4j, and python-dotenv as core requirements.
 
-**Authentication & Database:** Integrated Supabase backend providing:
-- User authentication (signup, login, logout, sessions)
-- PostgreSQL database with Row Level Security
-- Real-time capabilities and file storage
+**Authentication & Database:** Hybrid database architecture:
+- **Supabase**: User authentication (signup, login, logout, sessions), PostgreSQL database with Row Level Security, real-time capabilities and file storage
+- **Neo4j**: Graph database for relationships, recommendations, and advanced analytics
 - Demo login for hackathon convenience (`demo@hackathon.dev`)
+- Connection status monitoring for both databases
 
 ## Key Patterns
 

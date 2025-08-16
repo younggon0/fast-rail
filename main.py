@@ -151,7 +151,7 @@ def dashboard(session):
     if not user:
         return RedirectResponse("/login", status_code=302)
     
-    # Test database connection
+    # Test database connections
     db_status = "❌ Not tested"
     try:
         # Simple connection test without requiring specific tables
@@ -165,11 +165,21 @@ def dashboard(session):
     except Exception as e:
         db_status = f"❌ Exception: {str(e)}"
     
+    # Test Neo4j connection
+    neo4j_status = "❌ Not tested"
+    try:
+        from neo4j_config import test_neo4j_connection
+        neo4j_result = test_neo4j_connection()
+        neo4j_status = neo4j_result["status"]
+    except Exception as e:
+        neo4j_status = f"❌ Exception: {str(e)}"
+    
     return Titled("Dashboard",
         Div(
             H1("Dashboard"),
             P(f"Welcome to your dashboard, {user.get('email', 'User')}!"),
-            P(f"Database Status: {db_status}"),
+            P(f"Supabase Status: {db_status}"),
+            P(f"Neo4j Status: {neo4j_status}"),
             P("This is where you can add your app's main functionality."),
             A("Home", href="/"),
             style="text-align: center; margin-top: 50px;"
