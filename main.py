@@ -174,12 +174,25 @@ def dashboard(session):
     except Exception as e:
         neo4j_status = f"❌ Exception: {str(e)}"
     
+    # Test LLM connection
+    llm_status = "❌ Not tested"
+    try:
+        from llm import test_connection
+        result = test_connection()
+        if result["success"]:
+            llm_status = "✅ Connected"
+        else:
+            llm_status = f"❌ {result['error']}"
+    except Exception as e:
+        llm_status = f"❌ Exception: {str(e)}"
+    
     return Titled("Dashboard",
         Div(
             H1("Dashboard"),
             P(f"Welcome to your dashboard, {user.get('email', 'User')}!"),
             P(f"Supabase Status: {db_status}"),
             P(f"Neo4j Status: {neo4j_status}"),
+            P(f"LLM Status: {llm_status}"),
             P("This is where you can add your app's main functionality."),
             A("Home", href="/"),
             style="text-align: center; margin-top: 50px;"

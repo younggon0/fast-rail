@@ -84,3 +84,4 @@ coverage.xml
 
 # UV lock file (keep uv.lock but ignore local caches)
 .uv/
+.sesskey

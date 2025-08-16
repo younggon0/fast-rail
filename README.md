@@ -1,13 +1,16 @@
 # FastHTML + Railway Template
 
-A ready-to-deploy hackathon template using FastHTML and Railway.
+A ready-to-deploy hackathon template using FastHTML and Railway with integrated AI capabilities.
 
 ## Quick Start
 
-1. **Setup Databases:**
+1. **Setup Services:**
    ```bash
    cp .env.example .env
-   # Edit .env with your Supabase and Neo4j credentials
+   # Edit .env with your service credentials:
+   # - Supabase (database & auth)
+   # - Neo4j (graph database)
+   # - Anthropic (AI/LLM)
    uv run python setup_database.py  # Get SQL to run in Supabase dashboard
    ```
 
@@ -30,13 +33,14 @@ A ready-to-deploy hackathon template using FastHTML and Railway.
 
 ## Project Structure
 
-- `main.py` - Main application with auth and routes
+- `main.py` - Main application with auth, routes, and service dashboard
 - `auth.py` - Authentication functions and session management
 - `database.py` - Database helper class for Supabase operations
 - `supabase_config.py` - Supabase client configuration
 - `neo4j_config.py` - Neo4j client configuration and connection testing
+- `llm.py` - LangChain integration with Anthropic Claude for AI features
 - `setup_database.py` - Database setup script
-- `.env.example` - Environment variables template
+- `.env.example` - Environment variables template (Supabase, Neo4j, Anthropic)
 - `pyproject.toml` - Project dependencies (managed by uv)
 - `nixpacks.toml` - Railway build configuration for uv
 - `railway.toml` - Railway deployment configuration
@@ -46,18 +50,31 @@ A ready-to-deploy hackathon template using FastHTML and Railway.
 
 - 🚀 **One-click demo login** for hackathons
 - 🔐 **Supabase authentication** (signup, login, logout)
-- 📊 **Database integration** with Supabase + Neo4j
+- 📊 **Multi-database integration** with Supabase PostgreSQL + Neo4j graph database
+- 🤖 **AI/LLM integration** with LangChain + Anthropic Claude
 - 🎯 **Session management** with FastHTML
 - ⚡ **Protected routes** with auth decorators
+- 📈 **Service health monitoring** dashboard for all integrations
 - 🔗 **Graph database ready** with Neo4j connection
+- 🧠 **LLM capabilities** with structured chat and AI features
 - 🛠️ **Development-friendly** with hot reload
 
 ## Development
 
 Edit `main.py` to add your routes and features. The template includes:
-- Authentication system ready to use
-- Database operations via `Database` class
-- Session management built-in
-- Demo login for easy testing
+- **Authentication system** ready to use with Supabase
+- **Database operations** via `Database` class for PostgreSQL
+- **Graph database** operations via Neo4j client
+- **AI/LLM features** via LangChain and Anthropic integration
+- **Session management** built-in with FastHTML
+- **Service monitoring** dashboard showing connection status
+- **Demo login** for easy testing
 
-Happy hacking! =�
+## Service Dashboard
+
+Access `/dashboard` after login to see real-time status of:
+- ✅ Supabase connection and authentication
+- ✅ Neo4j graph database connection  
+- ✅ LLM/Anthropic API connection
+
+Happy hacking! 🚀
