@@ -1,3 +1,5 @@
+[App name](https://fast-rail-production.up.railway.app/
+)
 # FastHTML + Railway Template
 
 A ready-to-deploy hackathon template using FastHTML and Railway with integrated AI capabilities.
